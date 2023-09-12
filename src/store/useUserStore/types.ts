@@ -9,10 +9,12 @@ export type UserInfo = {
     currentAvatarThumbnailImageUrl: string;
     currentAvatar: string;
     currentAvatarAssetUrl: string;
+    bioLinks: string[];
 };
 
 export interface UserInfoState {
     userInfo: UserInfo;
     updateUserInfo: (userInfo: UserInfo) => void;
     pressTest: () => void;
+    getUserInfo: () => Promise<any>;
 }

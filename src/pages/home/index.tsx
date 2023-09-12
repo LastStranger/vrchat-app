@@ -1,10 +1,14 @@
 import React from "react";
-import { View, Text, Pressable, Image } from "react-native";
+import { View, Text, Pressable, Image, TouchableOpacity } from "react-native";
 import useUserStore from "../../store/useUserStore";
+import { ParamListBase, useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { Url } from "../../navigation/types";
 // import {Ionicons} from "@expo/vector-icons";
 
 const Index = () => {
     const { userInfo, pressTest } = useUserStore();
+    const navigation = useNavigation<NativeStackNavigationProp<ParamListBase, Url>>();
 
     const renderStatusColor = (status: string) => {
         switch (status) {
@@ -15,6 +19,10 @@ const Index = () => {
             default:
                 return "";
         }
+    };
+
+    const handleJumpToFriendsList = () => {
+        navigation.navigate(Url.FriendList);
     };
 
     return (
@@ -31,6 +39,9 @@ const Index = () => {
             <View className="mt-2 min-h-[200] rounded border-2 border-[#ddd]">
                 <Text className="p-2 text-base text-[#ddd]">{userInfo.bio}</Text>
             </View>
+            <TouchableOpacity onPress={handleJumpToFriendsList}>
+                <Text className="text-rose-300">跳转到朋友列表</Text>
+            </TouchableOpacity>
         </View>
     );
 };
