@@ -7,7 +7,7 @@ import { Url } from "../../navigation/types";
 // import {Ionicons} from "@expo/vector-icons";
 
 const Index = () => {
-    const { userInfo, pressTest } = useUserStore();
+    const { userInfo, pressTest, clearUserInfo } = useUserStore();
     const navigation = useNavigation<NativeStackNavigationProp<ParamListBase, Url>>();
 
     const renderStatusColor = (status: string) => {
@@ -23,6 +23,10 @@ const Index = () => {
 
     const handleJumpToFriendsList = () => {
         navigation.navigate(Url.FriendList);
+    };
+
+    const handleJumpToLogin = () => {
+        clearUserInfo();
     };
 
     return (
@@ -41,6 +45,9 @@ const Index = () => {
             </View>
             <TouchableOpacity onPress={handleJumpToFriendsList}>
                 <Text className="text-rose-300">跳转到朋友列表</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={handleJumpToLogin}>
+                <Text className="text-rose-300">跳转到登录页面</Text>
             </TouchableOpacity>
         </View>
     );

@@ -17,4 +17,6 @@ export interface UserInfoState {
     updateUserInfo: (userInfo: UserInfo) => void;
     pressTest: () => void;
     getUserInfo: () => Promise<any>;
+    getFriendList: (params: any) => void;
+    clearUserInfo: () => void;
 }
