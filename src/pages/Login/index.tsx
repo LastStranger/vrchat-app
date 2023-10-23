@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, Image, TextInput, TouchableOpacity } from "react-native";
+import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import { FormType } from "./types";
 import request from "../../utils/request";
 import { Buffer } from "buffer";
@@ -19,7 +19,10 @@ import Animated, {
     useSharedValue,
     withTiming,
 } from "react-native-reanimated";
+import Toast from "react-native-root-toast";
+import { Image } from "expo-image";
 
+const AnimatedImage = Animated.createAnimatedComponent(Image);
 const Index = () => {
     const [form, setForm] = useState<FormType>(null);
     const [ifNeedCode, setIfNeedCode] = useState<boolean>(false);
@@ -65,7 +68,7 @@ const Index = () => {
         let encodedAuth = new Buffer(`${encodeURI(form?.username)}:${encodeURI(form?.password)}`).toString("base64");
         const res = await request.get("/auth/user", {
             headers: { Authorization: `Basic ${encodedAuth}` },
-            // withCredentials: false,
+            withCredentials: false,
         });
         // console.log(res);
         if (res.data.requiresTwoFactorAuth) {
@@ -84,7 +87,7 @@ const Index = () => {
     return (
         <View className="flex-1 items-center justify-center bg-[#2d363f] px-4">
             <StatusBar style="light" />
-            <Animated.Image
+            <AnimatedImage
                 className="aspect-[118/50] w-32"
                 source={{
                     uri: "https://assets.vrchat.com/www/brand/vrchat-logo-white-transparent-crop-background.png",
