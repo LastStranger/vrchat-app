@@ -6,7 +6,7 @@ const Index = () => {
     const userStore = useUserStore();
 
     useEffect(() => {
-        userStore.getFriendList({ offset: 0 });
+        // userStore.getFriendList({ offset: 0 });
     }, []);
 
     return (

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, Image, TextInput, TouchableOpacity } from "react-native";
 import { FormType } from "./types";
 import request from "../../utils/request";
@@ -8,6 +8,17 @@ import { ParamListBase, useNavigation } from "@react-navigation/native";
 import useUserStore from "../../store/useUserStore";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Url } from "../../navigation/types";
+import Animated, {
+    FadeIn,
+    FadeInDown,
+    FadeInUp,
+    FadeOut,
+    FadeOutDown,
+    interpolateColor,
+    useAnimatedStyle,
+    useSharedValue,
+    withTiming,
+} from "react-native-reanimated";
 
 const Index = () => {
     const [form, setForm] = useState<FormType>(null);
@@ -58,7 +69,6 @@ const Index = () => {
         });
         // console.log(res);
         if (res.data.requiresTwoFactorAuth) {
-            console.warn("2222");
             setIfNeedCode(true);
             return;
         }
@@ -68,24 +78,26 @@ const Index = () => {
     };
 
     const handleGoToHome = () => {
-        navigation.navigate(Url.Home);
+        navigation.navigate(Url.Test);
     };
 
     return (
         <View className="flex-1 items-center justify-center bg-[#2d363f] px-4">
             <StatusBar style="light" />
-            <Image
+            <Animated.Image
                 className="aspect-[118/50] w-32"
                 source={{
                     uri: "https://assets.vrchat.com/www/brand/vrchat-logo-white-transparent-crop-background.png",
                 }}
+                entering={FadeInUp.delay(150)}
             />
-            <View className="mt-3 w-full">
+            <Animated.View className="mt-3 w-full" entering={FadeInDown.delay(150)}>
                 <TextInput
                     className="color-[#6ae3f9] rounded border-2 border-[#053c48] bg-[#05191d] px-3 py-3 text-lg/6"
                     placeholder="Username/Email"
                     placeholderTextColor="#757575"
                     value={form?.username}
+                    inputMode="text"
                     onChangeText={val => handleFormChange({ username: val })}
                 />
                 <TextInput
@@ -109,7 +121,7 @@ const Index = () => {
                 <TouchableOpacity className="full mt-2 items-center rounded bg-[#064b5c] p-2" onPress={handleGoToHome}>
                     <Text className="color-[#6ae3f9] text-2xl">tempBtn</Text>
                 </TouchableOpacity>
-            </View>
+            </Animated.View>
         </View>
     );
 };

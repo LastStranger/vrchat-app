@@ -10,11 +10,15 @@ const useUserStore = create<UserInfoState>(set => ({
         console.warn("pressTest");
     },
     getUserInfo: async () => {
-        const encodedAuth = "bGFzdF9zdHJhbmdlcjpsekAyMDIzMDMyMA==";
+        // const encodedAuth = "bGFzdF9zdHJhbmdlcjpsekAyMDIzMDMyMA==";
+        const encodedAuth = "";
         const res = await request.get("/auth/user", {
             headers: { Authorization: `Basic ${encodedAuth}` },
             // withCredentials: false,
         });
+        if (res.data?.requiresTwoFactorAuth) {
+            return;
+        }
         set({ userInfo: res.data });
     },
     getFriendList: async params => {
