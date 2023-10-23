@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { UserInfo, UserInfoState } from "./types";
-import request from "../../utils/request";
+import request from "@/utils/request";
 
 const useUserStore = create<UserInfoState>(set => ({
     userInfo: null,
@@ -11,15 +11,11 @@ const useUserStore = create<UserInfoState>(set => ({
     },
     getUserInfo: async () => {
         // const encodedAuth = "bGFzdF9zdHJhbmdlcjpsekAyMDIzMDMyMA==";
-        const encodedAuth = "";
-        const res = await request.get("/auth/user", {
-            headers: { Authorization: `Basic ${encodedAuth}` },
-            // withCredentials: false,
-        });
-        if (res.data?.requiresTwoFactorAuth) {
-            return;
-        }
-        set({ userInfo: res.data });
+        // const res = await request.get("/auth/user", {
+        //     headers: { Authorization: `Basic ${encodedAuth}` },
+        //     // withCredentials: false,
+        // });
+        // set({ userInfo: res.data });
     },
     getFriendList: async params => {
         const res = await request.get("/auth/user/friends", {

@@ -16,6 +16,7 @@
     "axios": "^1.5.0",
     "expo": "~49.0.8",
     "expo-image": "^1.5.1",
+    "expo-dev-client": "~2.4.10",
     "expo-splash-screen": "~0.20.5",
     "expo-status-bar": "~1.6.0",
     "nativewind": "^2.0.11",
@@ -31,6 +32,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
+    "babel-plugin-module-resolver": "^5.0.0",
     "eslint-config-lz": "^2.0.0",
     "prettier": "^3.0.3",
     "prettier-plugin-tailwindcss": "^0.5.4",

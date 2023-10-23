@@ -37,7 +37,7 @@ const Index = () => {
         });
     };
 
-    const handleEmailVerify = async () => {
+    const handleEmailVerify = async (ifNeedCookie: boolean = true) => {
         const res = await request.post(
             "/auth/twofactorauth/emailotp/verify",
             {
@@ -45,9 +45,12 @@ const Index = () => {
             },
             {
                 headers: { "Content-Type": "application/json" },
-                // withCredentials: false,
+                withCredentials: ifNeedCookie,
             },
         );
+        if (!res.data?.verified) {
+            return;
+        }
         // return;
         const Buffer = require("buffer").Buffer;
         let encodedAuth = new Buffer(`${encodeURI(form?.username)}:${encodeURI(form?.password)}`).toString("base64");
@@ -57,9 +60,14 @@ const Index = () => {
         console.log(userInfo);
     };
 
-    const handleLogin = async () => {
+    const handleLogin = async (ifNeedCookie: boolean = true) => {
+        if (!ifNeedCookie) {
+            // const RCTNetworking = require("react-native/Libraries/Network/RCTNetworking");
+            // RCTNetworking.clearCookies(() => {});
+        }
+
         if (ifNeedCode) {
-            handleEmailVerify();
+            handleEmailVerify(true);
             return;
         }
         // console.warn(form);
@@ -68,7 +76,7 @@ const Index = () => {
         let encodedAuth = new Buffer(`${encodeURI(form?.username)}:${encodeURI(form?.password)}`).toString("base64");
         const res = await request.get("/auth/user", {
             headers: { Authorization: `Basic ${encodedAuth}` },
-            withCredentials: false,
+            withCredentials: ifNeedCookie,
         });
         // console.log(res);
         if (res.data.requiresTwoFactorAuth) {
@@ -83,6 +91,8 @@ const Index = () => {
     const handleGoToHome = () => {
         navigation.navigate(Url.Test);
     };
+
+    // 登录loading 链接"https://assets.vrchat.com/www/images/loading.gif"
 
     return (
         <View className="flex-1 items-center justify-center bg-[#2d363f] px-4">
@@ -111,14 +121,23 @@ const Index = () => {
                     onChangeText={val => handleFormChange({ password: val })}
                 />
                 {ifNeedCode && (
-                    <TextInput
-                        className="color-[#6ae3f9] mt-2 rounded border-2 border-[#053c48] bg-[#05191d] px-3 py-3 text-lg/6"
-                        placeholder="验证码"
-                        placeholderTextColor="#757575"
-                        onChangeText={val => handleFormChange({ authCode: val })}
-                    />
+                    <View>
+                        <View className="mt-2 flex-row items-center">
+                            <Text className="color color-[#6ae3f9] text-base">验证码:</Text>
+                            <TextInput
+                                className="color-[#6ae3f9] ml-2 flex-1 rounded border-2 border-[#053c48] bg-[#05191d] px-3 py-3 text-lg/6"
+                                placeholder="请输入验证码"
+                                placeholderTextColor="#757575"
+                                onChangeText={val => handleFormChange({ authCode: val })}
+                            />
+                        </View>
+                        <Text onPress={() => handleLogin(false)}>没收到?尝试清除cookie再试一次</Text>
+                    </View>
                 )}
-                <TouchableOpacity className="full mt-2 items-center rounded bg-[#064b5c] p-2" onPress={handleLogin}>
+                <TouchableOpacity
+                    className="full mt-2 items-center rounded bg-[#064b5c] p-2"
+                    onPress={() => handleLogin(false)}
+                >
                     <Text className="color-[#6ae3f9] text-2xl">Login</Text>
                 </TouchableOpacity>
                 <TouchableOpacity className="full mt-2 items-center rounded bg-[#064b5c] p-2" onPress={handleGoToHome}>

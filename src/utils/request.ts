@@ -30,4 +30,11 @@ instance.interceptors.response.use(
     },
 );
 
+// instance.interceptors.request.use(async config => {
+//     const cookie = await AsyncStorage.getItem("cookie");
+//     if (cookie) {
+//         config.headers.Cookie = cookie;
+//     }
+//     return config;
+// });
 export default instance;
