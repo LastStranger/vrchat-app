@@ -7,7 +7,7 @@ import { StatusBar } from "expo-status-bar";
 import { ParamListBase, useNavigation } from "@react-navigation/native";
 import useUserStore from "../../store/useUserStore";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { Url } from "../../navigation/types";
+import { Url } from "@/navigation/types";
 import Animated, {
     FadeIn,
     FadeInDown,
