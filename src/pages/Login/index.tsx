@@ -21,13 +21,19 @@ import Animated, {
 } from "react-native-reanimated";
 import Toast from "react-native-root-toast";
 import { Image } from "expo-image";
+import { zustandStorage } from "@/store/mmkv";
 
 const AnimatedImage = Animated.createAnimatedComponent(Image);
 const Index = () => {
     const [form, setForm] = useState<FormType>(null);
     const [ifNeedCode, setIfNeedCode] = useState<boolean>(false);
     const userStore = useUserStore();
-    const navigation = useNavigation<NativeStackNavigationProp<ParamListBase, Url>>();
+    const navigation = useNavigation<any>();
+
+    useEffect(() => {
+        const test = zustandStorage.getItem("test");
+        console.warn(test, "testtest");
+    }, []);
 
     const handleFormChange = (item: any) => {
         console.warn(item);
@@ -45,7 +51,7 @@ const Index = () => {
             },
             {
                 headers: { "Content-Type": "application/json" },
-                withCredentials: ifNeedCookie,
+                withCredentials: true,
             },
         );
         if (!res.data?.verified) {
@@ -61,10 +67,10 @@ const Index = () => {
     };
 
     const handleLogin = async (ifNeedCookie: boolean = true) => {
-        if (!ifNeedCookie) {
-            // const RCTNetworking = require("react-native/Libraries/Network/RCTNetworking");
-            // RCTNetworking.clearCookies(() => {});
-        }
+        // if (!ifNeedCookie) {
+        //     // const RCTNetworking = require("react-native/Libraries/Network/RCTNetworking");
+        //     // RCTNetworking.clearCookies(() => {});
+        // }
 
         if (ifNeedCode) {
             handleEmailVerify(true);
@@ -76,7 +82,7 @@ const Index = () => {
         let encodedAuth = new Buffer(`${encodeURI(form?.username)}:${encodeURI(form?.password)}`).toString("base64");
         const res = await request.get("/auth/user", {
             headers: { Authorization: `Basic ${encodedAuth}` },
-            withCredentials: ifNeedCookie,
+            withCredentials: true,
         });
         // console.log(res);
         if (res.data.requiresTwoFactorAuth) {
@@ -89,7 +95,11 @@ const Index = () => {
     };
 
     const handleGoToHome = () => {
-        navigation.navigate(Url.Test);
+        navigation.navigate("home");
+    };
+
+    const handlePressTestBtn = () => {
+        zustandStorage.setItem("test", "a empty test");
     };
 
     // 登录loading 链接"https://assets.vrchat.com/www/images/loading.gif"
@@ -136,11 +146,14 @@ const Index = () => {
                 )}
                 <TouchableOpacity
                     className="full mt-2 items-center rounded bg-[#064b5c] p-2"
-                    onPress={() => handleLogin(false)}
+                    onPress={() => handleLogin()}
                 >
                     <Text className="color-[#6ae3f9] text-2xl">Login</Text>
                 </TouchableOpacity>
-                <TouchableOpacity className="full mt-2 items-center rounded bg-[#064b5c] p-2" onPress={handleGoToHome}>
+                <TouchableOpacity
+                    className="full mt-2 items-center rounded bg-[#064b5c] p-2"
+                    onPress={handlePressTestBtn}
+                >
                     <Text className="color-[#6ae3f9] text-2xl">tempBtn</Text>
                 </TouchableOpacity>
             </Animated.View>

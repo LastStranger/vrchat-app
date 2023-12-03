@@ -25,13 +25,13 @@ function AppNavigation() {
             <Stack.Navigator screenOptions={{ headerShown: false }}>
                 {userStore.userInfo ? (
                     <>
-                        <Stack.Screen name={Url.Home} component={Home} />
-                        <Stack.Screen name={Url.FriendList} component={FriendList} />
+                        <Stack.Screen name="home" component={Home} />
+                        <Stack.Screen name="friendList" component={FriendList} />
                     </>
                 ) : (
                     <>
-                        <Stack.Screen name={Url.Login} component={Login} />
-                        <Stack.Screen name={Url.Test} component={TestPage} />
+                        <Stack.Screen name="login" component={Login} />
+                        <Stack.Screen name="test" component={TestPage} />
                     </>
                 )}
             </Stack.Navigator>
