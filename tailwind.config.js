@@ -9,7 +9,7 @@ module.exports = {
                 busy: "#5b0b0b",
                 askMe: "#e88134",
                 offline: "gray",
-                white: "#ffffff",
+                vrcWhite: "#f8f9fa",
             },
         },
     },

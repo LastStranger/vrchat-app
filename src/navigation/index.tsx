@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import useUserStore from "../store/useUserStore";
 import FriendList from "../pages/friendList";
 import TestPage from "../pages/testPage";
+import Main from "@/pages/main";
 
 const Stack = createNativeStackNavigator();
 
@@ -24,11 +25,12 @@ function AppNavigation() {
             {/*<Stack.Navigator initialRouteName={Url.Login} screenOptions={{ headerShown: false }}>*/}
             <Stack.Navigator screenOptions={{ headerShown: false }}>
                 {userStore.userInfo ? (
-                    <>
-                        <Stack.Screen name="home" component={Home} />
-                        <Stack.Screen name="friendList" component={FriendList} />
-                    </>
+                    <Stack.Screen name="main" component={Main} />
                 ) : (
+                    // <>
+                    //     <Stack.Screen name="home" component={Home} />
+                    //     <Stack.Screen name="friendList" component={FriendList} />
+                    // </>
                     <>
                         <Stack.Screen name="login" component={Login} />
                         <Stack.Screen name="test" component={TestPage} />

@@ -31,8 +31,10 @@ const Index = () => {
     const navigation = useNavigation<any>();
 
     useEffect(() => {
-        const test = zustandStorage.getItem("test");
-        console.warn(test, "testtest");
+        const loginInfo = zustandStorage.getItem("loginInfo");
+        if (loginInfo) {
+            setForm(JSON.parse(loginInfo as string));
+        }
     }, []);
 
     const handleFormChange = (item: any) => {
@@ -91,6 +93,7 @@ const Index = () => {
         }
 
         console.warn(res.data?.bio);
+        zustandStorage.setItem("loginInfo", JSON.stringify(form));
         userStore.updateUserInfo(res.data);
     };
 
