@@ -10,6 +10,7 @@ export type UserInfo = {
     currentAvatar: string;
     currentAvatarAssetUrl: string;
     bioLinks: string[];
+    tags: string[];
 };
 
 export interface UserInfoState {

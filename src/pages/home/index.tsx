@@ -1,14 +1,24 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { View, Text, Pressable, Image, TouchableOpacity, SafeAreaView } from "react-native";
 import useUserStore from "../../store/useUserStore";
 import { ParamListBase, useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { Url } from "../../navigation/types";
+import { Url } from "@/navigation/types";
+import { getLanguage, getRank } from "@/utils";
 // import {Ionicons} from "@expo/vector-icons";
 
 const Index = () => {
     const { userInfo, pressTest, clearUserInfo } = useUserStore();
     const navigation = useNavigation<NativeStackNavigationProp<ParamListBase, Url>>();
+
+    const currentRank = useMemo(() => {
+        const prefixRankName = userInfo.tags?.pop();
+        return getRank(prefixRankName);
+    }, [userInfo]);
+
+    const languageTags = useMemo(() => {
+        return userInfo.tags.reduce((acc, tag) => [...acc, getLanguage(tag)], []);
+    }, [userInfo]);
 
     const renderStatusColor = (status: string) => {
         switch (status) {
@@ -46,10 +56,11 @@ const Index = () => {
                         <View className="flex-row items-center justify-between">
                             <View className="flex-row items-center">
                                 <View className={`mr-2.5 h-4 w-4 rounded-full ${renderStatusColor(userInfo.status)}`} />
-                                <Text className="text-vrcWhite text-xl">{userInfo.statusDescription}AFK coding</Text>
+                                <Text className="text-xl text-vrcWhite">{userInfo.statusDescription}AFK coding</Text>
                             </View>
-                            <View>
-                                <Text>333</Text>
+                            <View className="flex-row items-center justify-center rounded-lg px-2 py-1">
+                                <Text>盾牌</Text>
+                                <Text>{currentRank}</Text>
                             </View>
                         </View>
                     </View>
