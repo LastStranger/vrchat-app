@@ -10,6 +10,8 @@ module.exports = {
                 askMe: "#e88134",
                 offline: "gray",
                 vrcWhite: "#f8f9fa",
+                trusted: "#8143e6",
+                visitor: "#cccccc",
             },
         },
     },

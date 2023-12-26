@@ -1,7 +1,22 @@
 export function getRank(prefixRank: string) {
     switch (prefixRank) {
         case "system_trust_veteran":
-            return "Trusted";
+            return "trusted";
+        case "system_trust_trusted":
+            return "known";
+        case "system_trust_known":
+            return "user";
+        case "system_trust_basic":
+            return "new";
+        default:
+            return "visitor";
+    }
+}
+
+export function getRankColor(rank: string) {
+    switch (rank) {
+        case "trusted":
+            return "text-trusted";
         case "system_trust_trusted":
             return "Known";
         case "system_trust_known":
@@ -9,7 +24,7 @@ export function getRank(prefixRank: string) {
         case "system_trust_basic":
             return "New";
         default:
-            return "Visitor";
+            return "#cccccc";
     }
 }
 
