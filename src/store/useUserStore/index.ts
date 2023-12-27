@@ -21,6 +21,7 @@ const useUserStore = create<UserInfoState>(set => ({
         const res = await request.get("/auth/user/friends", {
             params: params,
         });
+        set({ friendList: res.data });
     },
     clearUserInfo: () => {
         console.warn("clearUserInfo");

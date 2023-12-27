@@ -15,6 +15,7 @@ export type UserInfo = {
 
 export interface UserInfoState {
     userInfo: UserInfo;
+    friendList: any;
     updateUserInfo: (userInfo: UserInfo) => void;
     pressTest: () => void;
     getUserInfo: () => Promise<any>;

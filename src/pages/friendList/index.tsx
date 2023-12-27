@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, FlatList } from "react-native";
 import useUserStore from "../../store/useUserStore";
+import FriendCard from "@/pages/friendList/components/FriendCard";
 
 const Index = () => {
-    const userStore = useUserStore();
+    const { friendList, getFriendList } = useUserStore();
+    // const [friendList, setFriendList] = useState([]);
 
     useEffect(() => {
-        // userStore.getFriendList({ offset: 0 });
+        // offline=false&n=50&offset=0
+        getFriendList({ offset: 0, offline: false, n: 50 });
     }, []);
 
     return (
         <View>
-            <Text>friendList</Text>
+            <Text>在线好友数量{friendList.length}</Text>
+            <FlatList data={friendList} renderItem={() => <FriendCard />} />
         </View>
     );
 };
