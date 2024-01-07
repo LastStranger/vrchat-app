@@ -17,8 +17,8 @@ export function getRankColor(rank: string) {
     switch (rank) {
         case "trusted":
             return "text-trusted";
-        case "system_trust_trusted":
-            return "Known";
+        case "known":
+            return "#ff7b42";
         case "system_trust_known":
             return "User";
         case "system_trust_basic":

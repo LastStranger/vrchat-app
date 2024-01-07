@@ -1,16 +1,18 @@
 import React, { useMemo } from "react";
-import { View, Text, Pressable, Image, TouchableOpacity, SafeAreaView } from "react-native";
+import { View, Text, Pressable, Image, TouchableOpacity, SafeAreaView, ScrollView } from "react-native";
 import useUserStore from "../../store/useUserStore";
 import { ParamListBase, useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Url } from "@/navigation/types";
 import { getLanguage, getRank, getRankColor } from "@/utils";
 import { Ionicons } from "@expo/vector-icons";
+import Groups from "@/pages/home/components/Groups";
 // import {Ionicons} from "@expo/vector-icons";
 
 const Index = () => {
-    const { userInfo, pressTest, clearUserInfo } = useUserStore();
-    const navigation = useNavigation<NativeStackNavigationProp<ParamListBase, Url>>();
+    const { userInfo, pressTest, clearUserInfo, logOut } = useUserStore();
+    const navigation = useNavigation<any>();
+    // const navigation = useNavigation<NativeStackNavigationProp<ParamListBase, Url>>();
 
     const currentRank = useMemo(() => {
         const prefixRankName = [...userInfo.tags]?.pop();
@@ -29,6 +31,8 @@ const Index = () => {
                 return "bg-askMe";
             case "active":
                 return "bg-online";
+            case "join me":
+                return "bg-joinMe";
             default:
                 return "";
         }
@@ -42,9 +46,13 @@ const Index = () => {
         clearUserInfo();
     };
 
+    const handleLogOut = () => {
+        logOut();
+    };
+
     return (
         <SafeAreaView className="flex-1 bg-[#2d363f]">
-            <View className="flex-1">
+            <ScrollView className="flex-1">
                 <View className="overflow-hidden rounded-lg bg-[#181b1f]">
                     <Image
                         className="aspect-[390/215] w-full"
@@ -57,7 +65,7 @@ const Index = () => {
                         <View className="flex-row items-center justify-between">
                             <View className="flex-row items-center">
                                 <View className={`mr-2.5 h-4 w-4 rounded-full ${renderStatusColor(userInfo.status)}`} />
-                                <Text className="text-vrcWhite text-xl">{userInfo.statusDescription}AFK coding</Text>
+                                <Text className="w-[210] text-xl text-vrcWhite">{userInfo.statusDescription}</Text>
                             </View>
                             <View
                                 style={{ backgroundColor: getRankColor(currentRank) }}
@@ -73,14 +81,14 @@ const Index = () => {
                     <Text className="p-2 text-base text-[#ddd]">{userInfo.bio}</Text>
                 </View>
                 <View className="mx-2">
-                    <Text className="text-vrcWhite text-xl">I speak</Text>
+                    <Text className="text-xl text-vrcWhite">I speak</Text>
                     <View className="mt-4 flex-row">
                         {languageTags.map(each => (
                             <View
                                 // style={{ backgroundColor: "rgba(17,17,17,0.8)" }}
                                 className="mr-3 rounded-full bg-[#111111] bg-opacity-80 px-3 py-1"
                             >
-                                <Text className="text-vrcWhite text-base font-bold">{each}</Text>
+                                <Text className="text-base font-bold text-vrcWhite">{each}</Text>
                             </View>
                         ))}
                     </View>
@@ -91,7 +99,11 @@ const Index = () => {
                 {/*<TouchableOpacity onPress={handleJumpToLogin}>*/}
                 {/*    <Text className="text-rose-300">跳转到登录页面</Text>*/}
                 {/*</TouchableOpacity>*/}
-            </View>
+                <Groups />
+                <Pressable onPress={handleLogOut}>
+                    <Text className="text-2xl">log out</Text>
+                </Pressable>
+            </ScrollView>
         </SafeAreaView>
     );
 };

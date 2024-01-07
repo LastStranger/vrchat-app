@@ -21,4 +21,5 @@ export interface UserInfoState {
     getUserInfo: () => Promise<any>;
     getFriendList: (params: any) => void;
     clearUserInfo: () => void;
+    logOut: () => void;
 }

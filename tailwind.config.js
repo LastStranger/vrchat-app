@@ -12,6 +12,7 @@ module.exports = {
                 vrcWhite: "#f8f9fa",
                 trusted: "#8143e6",
                 visitor: "#cccccc",
+                known: "#ff7b42",
             },
         },
     },

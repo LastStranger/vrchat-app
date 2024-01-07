@@ -27,6 +27,10 @@ const useUserStore = create<UserInfoState>(set => ({
         console.warn("clearUserInfo");
         set({ userInfo: null });
     },
+    logOut: async () => {
+        const res = await request.put("/logout");
+        set({ userInfo: null });
+    },
 }));
 
 export default useUserStore;
