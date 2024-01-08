@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { View, Text, Pressable, Image, TouchableOpacity, SafeAreaView, ScrollView } from "react-native";
 import useUserStore from "../../store/useUserStore";
-import { ParamListBase, useNavigation } from "@react-navigation/native";
+import { ParamListBase, useFocusEffect, useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Url } from "@/navigation/types";
 import { getLanguage, getRank, getRankColor } from "@/utils";
@@ -10,9 +10,18 @@ import Groups from "@/pages/home/components/Groups";
 // import {Ionicons} from "@expo/vector-icons";
 
 const Index = () => {
-    const { userInfo, pressTest, clearUserInfo, logOut } = useUserStore();
+    const { userInfo, pressTest, clearUserInfo, logOut, getUserInfo } = useUserStore();
     const navigation = useNavigation<any>();
     // const navigation = useNavigation<NativeStackNavigationProp<ParamListBase, Url>>();
+
+    useFocusEffect(
+        React.useCallback(() => {
+            getUserInfo();
+            // const unsubscribe = API.subscribe(userId, user => setUser(user));
+
+            // return () => unsubscribe();
+        }, []),
+    );
 
     const currentRank = useMemo(() => {
         const prefixRankName = [...userInfo.tags]?.pop();
@@ -49,6 +58,8 @@ const Index = () => {
     const handleLogOut = () => {
         logOut();
     };
+
+    console.warn("rendering home");
 
     return (
         <SafeAreaView className="flex-1 bg-[#2d363f]">
@@ -99,7 +110,7 @@ const Index = () => {
                 {/*<TouchableOpacity onPress={handleJumpToLogin}>*/}
                 {/*    <Text className="text-rose-300">跳转到登录页面</Text>*/}
                 {/*</TouchableOpacity>*/}
-                <Groups />
+                <Groups userId={userInfo?.id} />
                 <Pressable onPress={handleLogOut}>
                     <Text className="text-2xl">log out</Text>
                 </Pressable>
