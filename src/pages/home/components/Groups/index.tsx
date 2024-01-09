@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, FlatList, ImageBackground } from "react-native";
+import { View, Text, FlatList, ImageBackground, Image } from "react-native";
 import request from "@/utils/request";
 import { useFocusEffect } from "@react-navigation/native";
 import useUserStore from "@/store/useUserStore";
@@ -22,10 +22,19 @@ const Index: React.FC<Props> = props => {
 
     const renderItem = ({ item }) => {
         return (
-            <View className="h-[256px] w-[320px] overflow-hidden rounded-[8px] bg-white">
-                <ImageBackground source={{ uri: item.bannerUrl }} className="h-50 aspect-[3/1]">
-                    <Text>{item.name}</Text>
-                </ImageBackground>
+            <View className="h-[256px] w-[320px] overflow-hidden rounded-[8px] bg-[#181b1f]">
+                <View className="h-[150] bg-[#252a30]">
+                    <ImageBackground className="aspect-[3/1] w-full" source={{ uri: item.bannerUrl }}>
+                        <Image
+                            // style={{ borderWidth: 3 }}
+                            className="absolute bottom-[-32] left-[13] h-[75] w-[75] rounded-full border-[3px] border-[#181b1f]"
+                            source={{ uri: item.iconUrl }}
+                        />
+                    </ImageBackground>
+                    <Text className="ml-[100] mr-[10] mt-[4] text-xl font-bold text-white" numberOfLines={1}>
+                        {item.name}
+                    </Text>
+                </View>
             </View>
         );
     };
@@ -34,7 +43,10 @@ const Index: React.FC<Props> = props => {
         <View className="my-6">
             <Text className="ml-1.5 text-4xl">{userInfo.displayName}'s Groups</Text>
             <FlatList
-                contentContainerStyle={{ columnGap: 16 }}
+                contentOffset={{ x: 0, y: 0 }}
+                snapToInterval={336}
+                decelerationRate="fast"
+                contentContainerStyle={{ columnGap: 16, paddingHorizontal: 16 }}
                 horizontal
                 showsHorizontalScrollIndicator={false}
                 data={data}
