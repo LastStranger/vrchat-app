@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, FlatList, ImageBackground, Image } from "react-native";
+import { View, Text, FlatList, ImageBackground, Image, useWindowDimensions } from "react-native";
 import request from "@/utils/request";
 import { useFocusEffect } from "@react-navigation/native";
 import useUserStore from "@/store/useUserStore";
@@ -11,6 +11,7 @@ type Props = {
 const Index: React.FC<Props> = props => {
     const [data, setData] = useState<any[]>([]);
     const { userInfo } = useUserStore();
+    const { width } = useWindowDimensions();
     useFocusEffect(
         React.useCallback(() => {
             request.get(`/users/${props.userId}/groups`).then((res: any) => {
@@ -44,9 +45,20 @@ const Index: React.FC<Props> = props => {
             <Text className="ml-1.5 text-4xl">{userInfo.displayName}'s Groups</Text>
             <FlatList
                 contentOffset={{ x: 0, y: 0 }}
-                snapToInterval={336}
+                // snapToStart={false}
+                // snapToInterval={320 + 16}
+                // snapToInterval={324.5}
+                // snapToInterval={320 / 2 + (width / 2 - (width - 16 - 32 - 16))}
+                snapToOffsets={data.reduce(
+                    (acc, curr, index) => {
+                        return [...acc, acc[index] + 336];
+                    },
+                    [324.5],
+                )}
                 decelerationRate="fast"
-                contentContainerStyle={{ columnGap: 16, paddingHorizontal: 16 }}
+                // snapToEnd={false}
+                // snapToAlignment="center"
+                contentContainerStyle={{ columnGap: 16, paddingLeft: 16, paddingRight: 32 }}
                 horizontal
                 showsHorizontalScrollIndicator={false}
                 data={data}
