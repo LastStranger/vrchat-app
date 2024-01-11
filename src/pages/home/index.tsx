@@ -104,12 +104,6 @@ const Index = () => {
                         ))}
                     </View>
                 </View>
-                {/*<TouchableOpacity onPress={handleJumpToFriendsList}>*/}
-                {/*    <Text className="text-rose-300">跳转到朋友列表</Text>*/}
-                {/*</TouchableOpacity>*/}
-                {/*<TouchableOpacity onPress={handleJumpToLogin}>*/}
-                {/*    <Text className="text-rose-300">跳转到登录页面</Text>*/}
-                {/*</TouchableOpacity>*/}
                 <Groups userId={userInfo?.id} />
                 <Pressable onPress={handleLogOut}>
                     <Text className="text-2xl">log out</Text>
