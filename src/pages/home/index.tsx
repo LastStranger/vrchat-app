@@ -63,7 +63,7 @@ const Index = () => {
 
     return (
         <SafeAreaView className="flex-1 bg-[#2d363f]">
-            <ScrollView className="flex-1">
+            <ScrollView className="mb-4 flex-1">
                 <View className="overflow-hidden rounded-lg bg-[#181b1f]">
                     <Image
                         className="aspect-[390/215] w-full"
@@ -88,9 +88,9 @@ const Index = () => {
                         </View>
                     </View>
                 </View>
-                <View className="mx-2 my-9 min-h-[200] rounded border-2 border-[#ddd]">
+                <ScrollView className="mx-2 my-9 h-44 min-h-[200] rounded border-2 border-[#ddd]">
                     <Text className="p-2 text-base text-[#ddd]">{userInfo.bio}</Text>
-                </View>
+                </ScrollView>
                 <View className="mx-2">
                     <Text className="text-xl text-vrcWhite">I speak</Text>
                     <View className="mt-4 flex-row">
@@ -105,9 +105,9 @@ const Index = () => {
                     </View>
                 </View>
                 <Groups userId={userInfo?.id} />
-                <Pressable onPress={handleLogOut}>
-                    <Text className="text-2xl">log out</Text>
-                </Pressable>
+                {/*<Pressable onPress={handleLogOut}>*/}
+                {/*    <Text className="text-2xl">log out</Text>*/}
+                {/*</Pressable>*/}
             </ScrollView>
         </SafeAreaView>
     );

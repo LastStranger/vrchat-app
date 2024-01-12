@@ -3,13 +3,15 @@ import { View, Text, FlatList, ImageBackground, Image, useWindowDimensions } fro
 import request from "@/utils/request";
 import { useFocusEffect } from "@react-navigation/native";
 import useUserStore from "@/store/useUserStore";
+import { MaterialIcons } from "@expo/vector-icons";
+import { groupInfo } from "@/pages/home/components/Groups/types";
 
 type Props = {
     userId: string;
 };
 
 const Index: React.FC<Props> = props => {
-    const [data, setData] = useState<any[]>([]);
+    const [data, setData] = useState<groupInfo[]>([]);
     const { userInfo } = useUserStore();
     const { width } = useWindowDimensions();
     useFocusEffect(
@@ -23,7 +25,7 @@ const Index: React.FC<Props> = props => {
 
     const renderItem = ({ item }) => {
         return (
-            <View className="h-[256px] w-[320px] overflow-hidden rounded-[8px] bg-[#181b1f]">
+            <View className="h-[242px] w-[320px] overflow-hidden rounded-[8px] bg-[#181b1f]">
                 <View className="h-[150] bg-[#252a30]">
                     <ImageBackground className="aspect-[3/1] w-full" source={{ uri: item.bannerUrl }}>
                         <Image
@@ -36,13 +38,27 @@ const Index: React.FC<Props> = props => {
                         {item.name}
                     </Text>
                 </View>
+                <View className="p-[8px]">
+                    <Text className="h-[58] text-[#737372]" numberOfLines={2}>
+                        {item.description}
+                    </Text>
+                    <View className="flex-row items-center justify-between">
+                        <View className="flex-row items-center">
+                            <MaterialIcons className="bg-white" name="groups" size={24} color="#737372" />
+                            <Text className="ml-[2px] pt-[2px] text-[#737372]">{item.memberCount}</Text>
+                        </View>
+                        <Text className="text-[#737372]">
+                            {item.shortCode}.{item.discriminator}
+                        </Text>
+                    </View>
+                </View>
             </View>
         );
     };
 
     return (
         <View className="my-6">
-            <Text className="ml-1.5 text-4xl">{userInfo.displayName}'s Groups</Text>
+            <Text className="ml-1.5 text-4xl text-[#f8f9fa]">{userInfo.displayName}'s Groups</Text>
             <FlatList
                 contentOffset={{ x: 0, y: 0 }}
                 // snapToStart={false}
@@ -58,7 +74,7 @@ const Index: React.FC<Props> = props => {
                 decelerationRate="fast"
                 // snapToEnd={false}
                 // snapToAlignment="center"
-                contentContainerStyle={{ columnGap: 16, paddingLeft: 16, paddingRight: 32 }}
+                contentContainerStyle={{ columnGap: 16, paddingLeft: 16, paddingRight: 32, marginTop: 16 }}
                 horizontal
                 showsHorizontalScrollIndicator={false}
                 data={data}
