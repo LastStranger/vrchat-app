@@ -11,6 +11,8 @@ export type UserInfo = {
     currentAvatarAssetUrl: string;
     bioLinks: string[];
     tags: string[];
+    friends: string[];
+    onlineFriends: string[];
 };
 
 export interface UserInfoState {

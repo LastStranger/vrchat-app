@@ -1,10 +1,17 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { Text, View, Image } from "react-native";
 
-const Index = () => {
+const Index = (props: any) => {
     return (
-        <View classnames="bordered bg-white">
-            <Text classname="text-center">friends</Text>
+        <View className="w-full rounded border-2 border-[#8143E6] bg-[#242a31] p-[15px]">
+            <View className="flex-row">
+                <View className="h-[74] w-[128px] rounded border-2 border-[#67d781]">
+                    <Image className="h-full w-full rounded" source={{ uri: props.currentAvatarThumbnailImageUrl }} />
+                </View>
+                <View>
+                    <Text className="text-center text-white">{props.displayName}</Text>
+                </View>
+            </View>
         </View>
     );
 };

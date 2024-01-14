@@ -6,6 +6,7 @@ const useUserStore = create<UserInfoState>(set => ({
     userInfo: null,
     groupInfo: [],
     friendList: [],
+    onlineFriendList: [],
     updateUserInfo: (userInfo: UserInfo) => set(state => ({ userInfo: userInfo })),
     pressTest: () => {
         console.warn("pressTest");
@@ -22,7 +23,7 @@ const useUserStore = create<UserInfoState>(set => ({
         const res = await request.get("/auth/user/friends", {
             params: params,
         });
-        set({ friendList: res.data });
+        set({ friendList: [{ title: "online Friends", data: res.data }] });
     },
     clearUserInfo: () => {
         console.warn("clearUserInfo");
