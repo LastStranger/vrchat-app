@@ -29,7 +29,9 @@ const Index = () => {
                     keyExtractor={(item, index) => item.id}
                     sections={friendList}
                     renderItem={renderItem}
-                    renderSectionHeader={({ section }) => <Text className="text-white">{section.title}</Text>}
+                    renderSectionHeader={({ section }) => (
+                        <Text className="text-[26px] font-bold text-white">{section.title}</Text>
+                    )}
                 />
             </SafeAreaView>
             <Text>在线好友数量{friendList.length}</Text>

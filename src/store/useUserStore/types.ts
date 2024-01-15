@@ -5,8 +5,10 @@ export type UserInfo = {
     statusDescription: string;
     bio: string;
     username: string;
-    currentAvatarImageUrl: string;
-    currentAvatarThumbnailImageUrl: string;
+    currentAvatarImageUrl: string; // 这个可能是机器人
+    currentAvatarThumbnailImageUrl: string; // 这个可能是机器人
+    profilePicOverride: string; //  这个可能是plus会员才能更改的默认图片吧
+    imageUrl: string; // 这个目前看起来和profilePicOverride是一样的
     currentAvatar: string;
     currentAvatarAssetUrl: string;
     bioLinks: string[];
