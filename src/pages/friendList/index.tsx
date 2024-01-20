@@ -5,7 +5,6 @@ import FriendCard from "@/pages/friendList/components/FriendCard";
 
 const Index = () => {
     const { friendList, getFriendList, userInfo } = useUserStore();
-    // const [friendList, setFriendList] = useState([]);
 
     useEffect(() => {
         // offline=false&n=50&offset=0
@@ -35,7 +34,6 @@ const Index = () => {
                 />
             </SafeAreaView>
             <Text>在线好友数量{friendList.length}</Text>
-            {/*<FlatList data={friendList} renderItem={() => <FriendCard />} />*/}
         </View>
     );
 };
