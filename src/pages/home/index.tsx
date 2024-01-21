@@ -59,7 +59,7 @@ const Index = () => {
         logOut();
     };
 
-    console.warn("rendering home");
+    console.warn("rendering home1");
 
     return (
         <SafeAreaView className="flex-1 bg-[#2d363f]">

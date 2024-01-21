@@ -8,8 +8,9 @@ const Index = (props: any) => {
                 <View className="h-[74] w-[128px] rounded border-2 border-[#67d781]">
                     <Image className="h-full w-full rounded" source={{ uri: props.imageUrl }} />
                 </View>
-                <View>
-                    <Text className="text-center text-white">{props.displayName}</Text>
+                <View className="mx-[10] my-[5]">
+                    <Text className="text-center text-[16px] font-bold text-[#0f9bb1]">{props.displayName}</Text>
+                    <Text>{props.statusDescription}</Text>
                 </View>
             </View>
         </View>
