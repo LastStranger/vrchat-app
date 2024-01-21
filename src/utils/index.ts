@@ -40,3 +40,14 @@ export function getLanguage(prefixLanguage: string) {
             return "未知";
     }
 }
+
+export const getWorldKey = (worldKey: string) => {
+    if (worldKey === "offline" || worldKey === "traveling") {
+        return "";
+    }
+    if (worldKey === "private") {
+        // return worldKey;
+        return "";
+    }
+    return worldKey.split(":")[0];
+};
