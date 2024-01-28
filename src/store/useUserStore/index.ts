@@ -7,6 +7,7 @@ const useUserStore = create<UserInfoState>(set => ({
     groupInfo: [],
     friendList: [],
     onlineFriendList: [],
+    loading: false,
     updateUserInfo: (userInfo: UserInfo) => set(state => ({ userInfo: userInfo })),
     pressTest: () => {
         console.warn("pressTest");
@@ -19,11 +20,19 @@ const useUserStore = create<UserInfoState>(set => ({
         });
         set({ userInfo: res.data });
     },
+    // initialFriendList:async () => {
+    //     set({loading: true});
+    //     const res = await request.get("/auth/user/friends", {
+    //         params: params,
+    //     });
+    //     set({ friendList: [{ title: "online Friends", data: res.data }], loading: false });
+    // },
     getFriendList: async params => {
+        set({ loading: true });
         const res = await request.get("/auth/user/friends", {
             params: params,
         });
-        set({ friendList: [{ title: "online Friends", data: res.data }] });
+        set({ friendList: [{ title: "online Friends", data: res.data }], loading: false });
     },
     clearUserInfo: () => {
         console.warn("clearUserInfo");

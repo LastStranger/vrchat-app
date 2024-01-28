@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, FlatList, SafeAreaView, StatusBar, TextInput, SectionList } from "react-native";
+import { View, Text, FlatList, SafeAreaView, StatusBar, TextInput, SectionList, RefreshControl } from "react-native";
 import useUserStore from "../../store/useUserStore";
 import FriendCard from "@/pages/friendList/components/FriendCard";
 
 const Index = () => {
-    const { friendList, getFriendList, userInfo } = useUserStore();
+    const { friendList, getFriendList, userInfo, loading } = useUserStore();
 
     useEffect(() => {
         // offline=false&n=50&offset=0
@@ -14,9 +14,9 @@ const Index = () => {
     const renderItem = ({ item }) => <FriendCard {...item} />;
 
     return (
-        <View className="bg-[#050505] px-5">
+        <View className="flex-1 bg-[#050505] px-5">
             <StatusBar barStyle="light-content" />
-            <SafeAreaView>
+            <SafeAreaView className="flex-1">
                 <View className="flex-row items-center justify-between">
                     <Text className="text-[28px] text-white">Friends</Text>
                     <Text className="text-[28px] text-white">
@@ -25,6 +25,17 @@ const Index = () => {
                 </View>
                 <TextInput className="mt-4 h-[28px] w-full rounded bg-[#3b3b3b]" placeholderTextColor="white" />
                 <SectionList
+                    refreshControl={
+                        <RefreshControl
+                            colors="white"
+                            tintColor="white"
+                            refreshing={loading}
+                            onRefresh={() => getFriendList({ offset: 0, offline: false, n: 50 })}
+                        />
+                    }
+                    // refreshing={loading}
+                    // onRefresh={() => getFriendList({ offset: 0, offline: false, n: 50 })}
+                    className="flex-1"
                     keyExtractor={(item, index) => item.id}
                     sections={friendList}
                     renderItem={renderItem}
