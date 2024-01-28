@@ -40,7 +40,7 @@ const Index = () => {
                     sections={friendList}
                     renderItem={renderItem}
                     renderSectionHeader={({ section }) => (
-                        <Text className="text-[26px] font-bold text-white">{section.title}</Text>
+                        <Text className="bg-[#050505] py-[10] text-[26px] font-bold text-white">{section.title}</Text>
                     )}
                 />
             </SafeAreaView>
