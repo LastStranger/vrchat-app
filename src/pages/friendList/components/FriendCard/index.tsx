@@ -1,12 +1,18 @@
 import React from "react";
-import { Text, View, Image } from "react-native";
+import { Text, View, Image, Pressable } from "react-native";
 import FriendLocation from "@/pages/friendList/components/FriendLocation";
 import { getWorldKey } from "@/utils";
+import { useNavigation } from "@react-navigation/native";
 
 const Index = (props: any) => {
+    const navigation = useNavigation<any>();
+    const handleGoToProfile = () => {
+        navigation.navigate("profile", { id: props.id });
+    };
+
     return (
         <View className="mt-[8px] w-full rounded border-2 border-[#8143E6] bg-[#242a31] p-[15px]">
-            <View className="flex-row">
+            <Pressable className="flex-row" onPress={handleGoToProfile}>
                 <View className="h-[74] w-[128px] rounded border-2 border-[#67d781]">
                     <Image className="h-full w-full rounded" source={{ uri: props.imageUrl }} />
                 </View>
@@ -16,7 +22,7 @@ const Index = (props: any) => {
                         {props.statusDescription}
                     </Text>
                 </View>
-            </View>
+            </Pressable>
             {getWorldKey(props.location) && (
                 <FriendLocation worldKey={getWorldKey(props.location)} name={props.displayName} />
             )}
