@@ -1,9 +1,9 @@
 export function getRank(prefixRank: string) {
     switch (prefixRank) {
         case "system_trust_veteran":
-            return "trusted";
+            return "Trusted";
         case "system_trust_trusted":
-            return "known";
+            return "Known";
         case "system_trust_known":
             return "user";
         case "system_trust_basic":
@@ -28,6 +28,27 @@ export function getRankColor(rank: string) {
     }
 }
 
+export function getRankColorByTags(tags: string[] = []) {
+    const prefixRank = tags.findLast(each => each.indexOf("system_trust_") !== -1);
+    switch (prefixRank) {
+        case "system_trust_veteran":
+            return "#8143e6";
+        case "system_trust_trusted":
+            return "#ff7b42";
+        case "system_trust_known":
+            return "User";
+        case "system_trust_basic":
+            return "New";
+        default:
+            return "#cccccc";
+    }
+}
+
+export function getRankNameByTags(tags: string[]) {
+    const prefixRank = tags.findLast(each => each.indexOf("system_trust_") !== -1);
+    return getRank(prefixRank);
+}
+
 export function getLanguage(prefixLanguage: string) {
     switch (prefixLanguage) {
         case "language_eng":
@@ -50,4 +71,17 @@ export const getWorldKey = (worldKey: string) => {
         return "";
     }
     return worldKey.split(":")[0];
+};
+
+export const statusColor = (status: string) => {
+    switch (status) {
+        case "ask me":
+            return "bg-askMe";
+        case "active":
+            return "bg-online";
+        case "join me":
+            return "bg-joinMe";
+        default:
+            return "";
+    }
 };
