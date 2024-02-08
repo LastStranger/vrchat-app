@@ -45,7 +45,7 @@ export function getRankColorByTags(tags: string[] = []) {
 }
 
 export function getRankNameByTags(tags: string[]) {
-    const prefixRank = tags.findLast(each => each.indexOf("system_trust_") !== -1);
+    const prefixRank = tags?.findLast(each => each.indexOf("system_trust_") !== -1);
     return getRank(prefixRank);
 }
 
@@ -57,6 +57,8 @@ export function getLanguage(prefixLanguage: string) {
             return "中文";
         case "language_jpn":
             return "日本語";
+        case "language_por":
+            return "葡萄牙语";
         default:
             return "未知";
     }

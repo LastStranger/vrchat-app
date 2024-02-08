@@ -26,4 +26,5 @@ export interface UserInfoState {
     getFriendList: (params?: any) => void;
     clearUserInfo: () => void;
     logOut: () => void;
+    loading: boolean;
 }

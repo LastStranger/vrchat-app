@@ -7,6 +7,8 @@ type Params = {
 };
 
 type ProfileData = {
+    id: string;
+
     currentAvatarImageUrl: string;
     displayName: string;
     status: string;

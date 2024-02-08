@@ -27,7 +27,7 @@ const Index = () => {
                 <SectionList
                     refreshControl={
                         <RefreshControl
-                            colors="white"
+                            // colors="white"
                             tintColor="white"
                             refreshing={loading}
                             onRefresh={() => getFriendList({ offset: 0, offline: false, n: 50 })}
