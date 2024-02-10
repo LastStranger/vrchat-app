@@ -11,8 +11,19 @@ type Props = {
     id: string;
 };
 const Index = ({ route, navigation }) => {
-    const data = useProfileInfo(route.params.id);
-    console.warn("22");
+    const [data, loading] = useProfileInfo(route.params.id);
+    // console.warn("22");
+    if (loading) {
+        return (
+            <View className="flex-1 bg-[#0e1013]">
+                <Image
+                    className="h-full w-full"
+                    contentFit="contain"
+                    source="https://assets.vrchat.com/www/images/loading.gif"
+                />
+            </View>
+        );
+    }
     return (
         <View className="flex-1 bg-[#0e1013]">
             {/*<SvgUri*/}

@@ -4,7 +4,7 @@ import useUserStore from "../../store/useUserStore";
 import { ParamListBase, useFocusEffect, useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Url } from "@/navigation/types";
-import { getLanguage, getRank, getRankColor } from "@/utils";
+import { getLanguage, getRank, getRankColor, getRankColorByRank } from "@/utils";
 import { Ionicons } from "@expo/vector-icons";
 import Groups from "@/pages/home/components/Groups";
 import { Image } from "expo-image";
@@ -80,7 +80,10 @@ const Index = () => {
                                 <Text className="w-[210] text-xl text-vrcWhite">{userInfo.statusDescription}</Text>
                             </View>
                             <View
-                                style={{ backgroundColor: getRankColor(currentRank) }}
+                                style={{
+                                    backgroundColor: getRankColorByRank(currentRank),
+                                    transform: [{ scale: 0.8 }],
+                                }}
                                 className="flex-row items-center justify-center rounded-lg px-2 py-1"
                             >
                                 <Ionicons name="shield" size={12} color="black" />

@@ -44,6 +44,21 @@ export function getRankColorByTags(tags: string[] = []) {
     }
 }
 
+export function getRankColorByRank(rank: string): string {
+    switch (rank) {
+        case "Trusted":
+            return "text-trusted";
+        case "Known":
+            return "#ff7b42";
+        // case "system_trust_known":
+        //     return "User";
+        // case "system_trust_basic":
+        //     return "New";
+        default:
+            return "#cccccc";
+    }
+}
+
 export function getRankNameByTags(tags: string[]) {
     const prefixRank = tags?.findLast(each => each.indexOf("system_trust_") !== -1);
     return getRank(prefixRank);

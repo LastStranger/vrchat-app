@@ -20,17 +20,23 @@ type ProfileData = {
 
 const useProfileInfo = (id: string) => {
     const [data, setData] = useState<ProfileData | null>(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        request.get(`/users/${id}`).then(res => {
-            const languages = res.data?.tags
-                ?.filter(each => each.startsWith("language_"))
-                .reduce((acc, tag) => [...acc, getLanguage(tag)], []);
-            setData({ ...res.data, languages });
-        });
+        request
+            .get(`/users/${id}`)
+            .then(res => {
+                const languages = res.data?.tags
+                    ?.filter(each => each.startsWith("language_"))
+                    .reduce((acc, tag) => [...acc, getLanguage(tag)], []);
+                setData({ ...res.data, languages });
+            })
+            .finally(() => {
+                setLoading(false);
+            });
     }, []);
 
-    return data;
+    return [data, loading];
 };
 
 export default useProfileInfo;
