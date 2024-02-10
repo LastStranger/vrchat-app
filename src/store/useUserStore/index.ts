@@ -13,12 +13,17 @@ const useUserStore = create<UserInfoState>(set => ({
         console.warn("pressTest");
     },
     getUserInfo: async () => {
+        set({ loading: true });
         // const encodedAuth = "bGFzdF9zdHJhbmdlcjpsekAyMDIzMDMyMA==";
-        const res = await request.get("/auth/user", {
-            // headers: { Authorization: `Basic ${encodedAuth}` },
-            // withCredentials: false,
-        });
-        set({ userInfo: res.data });
+        try {
+            const res = await request.get("/auth/user", {
+                // headers: { Authorization: `Basic ${encodedAuth}` },
+                // withCredentials: false,
+            });
+            set({ userInfo: res.data, loading: false });
+        } catch (e) {
+            set({ loading: false });
+        }
     },
     // initialFriendList:async () => {
     //     set({loading: true});

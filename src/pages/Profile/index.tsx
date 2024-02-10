@@ -1,5 +1,6 @@
 import React from "react";
-import { View, Text, SafeAreaView, ImageBackground, Image, ScrollView } from "react-native";
+import { View, Text, SafeAreaView, ImageBackground, ScrollView } from "react-native";
+import { Image } from "expo-image";
 import useProfileInfo from "@/pages/Profile/hooks/useProfileInfo";
 // import { SvgUri } from "react-native-svg";
 import { getRankColor, getRankColorByTags, getRankNameByTags, statusColor } from "@/utils";

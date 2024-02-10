@@ -107,6 +107,16 @@ const Index = () => {
 
     // 登录loading 链接"https://assets.vrchat.com/www/images/loading.gif"
 
+    if (userStore.loading) {
+        return (
+            <Image
+                className="h-full w-full bg-[#2d363f]"
+                contentFit="contain"
+                source="https://assets.vrchat.com/www/images/loading.gif"
+            />
+        );
+    }
+
     return (
         <View className="flex-1 items-center justify-center bg-[#2d363f] px-4">
             <StatusBar style="light" />

@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { View, Text, Pressable, Image, TouchableOpacity, SafeAreaView, ScrollView } from "react-native";
+import { View, Text, Pressable, TouchableOpacity, SafeAreaView, ScrollView } from "react-native";
 import useUserStore from "../../store/useUserStore";
 import { ParamListBase, useFocusEffect, useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -7,6 +7,7 @@ import { Url } from "@/navigation/types";
 import { getLanguage, getRank, getRankColor } from "@/utils";
 import { Ionicons } from "@expo/vector-icons";
 import Groups from "@/pages/home/components/Groups";
+import { Image } from "expo-image";
 // import {Ionicons} from "@expo/vector-icons";
 
 const Index = () => {

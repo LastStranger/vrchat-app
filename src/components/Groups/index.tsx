@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { View, Text, FlatList, ImageBackground, Image, useWindowDimensions } from "react-native";
+import { View, Text, FlatList, ImageBackground, useWindowDimensions } from "react-native";
+import { Image } from "expo-image";
 import request from "@/utils/request";
 import { useFocusEffect } from "@react-navigation/native";
 // import useUserStore from "@/store/useUserStore";
