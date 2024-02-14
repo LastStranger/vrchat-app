@@ -18,9 +18,9 @@ type ProfileData = {
     languages: string[];
 };
 
-const useProfileInfo = (id: string) => {
+const useProfileInfo = (id: string): [ProfileData, boolean] => {
     const [data, setData] = useState<ProfileData | null>(null);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
         request

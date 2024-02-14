@@ -24,7 +24,7 @@ const Index = () => {
         >
             <Tab.Screen
                 name="friendList"
-                labeled={false}
+                // labeled={false}
                 component={FriendList}
                 options={{
                     tabBarIcon: ({ color }) => <FontAwesome5 name="user-friends" size={28} color={color} />,
