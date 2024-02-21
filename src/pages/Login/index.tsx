@@ -101,10 +101,6 @@ const Index = () => {
         navigation.navigate("home");
     };
 
-    const handlePressTestBtn = () => {
-        zustandStorage.setItem("test", "a empty test");
-    };
-
     // 登录loading 链接"https://assets.vrchat.com/www/images/loading.gif"
 
     if (userStore.loading) {
@@ -162,12 +158,6 @@ const Index = () => {
                     onPress={() => handleLogin()}
                 >
                     <Text className="color-[#6ae3f9] text-2xl">Login</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    className="full mt-2 items-center rounded bg-[#064b5c] p-2"
-                    onPress={handlePressTestBtn}
-                >
-                    <Text className="color-[#6ae3f9] text-2xl">tempBtn</Text>
                 </TouchableOpacity>
             </Animated.View>
         </View>

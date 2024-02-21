@@ -11,7 +11,12 @@ import { Image } from "expo-image";
 // import {Ionicons} from "@expo/vector-icons";
 
 const Index = () => {
-    const { userInfo, pressTest, clearUserInfo, logOut, getUserInfo } = useUserStore();
+    // const { userInfo, pressTest, clearUserInfo, logOut, getUserInfo } = useUserStore();
+
+    const userInfo = useUserStore(state => state.userInfo);
+    const clearUserInfo = useUserStore(state => state.clearUserInfo);
+    const logOut = useUserStore(state => state.logOut);
+    const getUserInfo = useUserStore(state => state.getUserInfo);
     const navigation = useNavigation<any>();
     // const navigation = useNavigation<NativeStackNavigationProp<ParamListBase, Url>>();
 
@@ -19,7 +24,6 @@ const Index = () => {
         React.useCallback(() => {
             getUserInfo();
             // const unsubscribe = API.subscribe(userId, user => setUser(user));
-
             // return () => unsubscribe();
         }, []),
     );

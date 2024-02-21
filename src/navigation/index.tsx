@@ -15,17 +15,20 @@ const Stack = createNativeStackNavigator();
 
 function AppNavigation() {
     const [isSignIn, setIsSignIn] = useState(false);
-    const userStore = useUserStore();
+    const userInfo = useUserStore(state => state.userInfo);
+    const getUserInfo = useUserStore(state => state.getUserInfo);
+
+    console.warn("AppNavigation renderings");
 
     useEffect(() => {
-        userStore.getUserInfo();
+        getUserInfo();
     }, []);
 
     return (
         <NavigationContainer>
             {/*<Stack.Navigator initialRouteName={Url.Login} screenOptions={{ headerShown: false }}>*/}
             <Stack.Navigator screenOptions={{ headerShown: false }}>
-                {userStore.userInfo ? (
+                {userInfo ? (
                     <>
                         <Stack.Screen name="main" component={Main} />
                         <Stack.Screen name="profile" component={Profile} />
