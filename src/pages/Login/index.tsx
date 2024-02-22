@@ -62,10 +62,10 @@ const Index = () => {
         // return;
         const Buffer = require("buffer").Buffer;
         let encodedAuth = new Buffer(`${encodeURI(form?.username)}:${encodeURI(form?.password)}`).toString("base64");
-        const userInfo = await request.get("/auth/user", {
+        const result = await request.get("/auth/user", {
             headers: { Authorization: `Basic ${encodedAuth}` },
         });
-        console.log(userInfo);
+        userStore.updateUserInfo(result.data);
     };
 
     const handleLogin = async (ifNeedCookie: boolean = true) => {

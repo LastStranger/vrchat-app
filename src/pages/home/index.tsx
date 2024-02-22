@@ -64,7 +64,7 @@ const Index = () => {
         logOut();
     };
 
-    console.warn("rendering home1");
+    // console.warn("rendering home1");
 
     return (
         <SafeAreaView className="flex-1 bg-[#2d363f]">
@@ -104,6 +104,7 @@ const Index = () => {
                     <View className="mt-4 flex-row">
                         {languageTags.map(each => (
                             <View
+                                key={each}
                                 // style={{ backgroundColor: "rgba(17,17,17,0.8)" }}
                                 className="mr-3 rounded-full bg-[#111111] bg-opacity-80 px-3 py-1"
                             >

@@ -18,7 +18,7 @@ function AppNavigation() {
     const userInfo = useUserStore(state => state.userInfo);
     const getUserInfo = useUserStore(state => state.getUserInfo);
 
-    console.warn("AppNavigation renderings");
+    // console.warn("AppNavigation renderings");
 
     useEffect(() => {
         getUserInfo();
