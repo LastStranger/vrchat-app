@@ -17,7 +17,6 @@ const Index: React.FC<Props> = props => {
     useFocusEffect(
         React.useCallback(() => {
             request.get(`/users/${props.userId}/groups`).then((res: any) => {
-                console.log(res);
                 setData(res.data);
             });
         }, [props.userId]),

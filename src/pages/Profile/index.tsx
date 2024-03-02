@@ -58,7 +58,9 @@ const Index = ({ route, navigation }) => {
                             </View>
                         </View>
                         <View className="mt-2 max-h-[600] w-full bg-[#262a30] p-2">
-                            <Text className="text-[#dadada]">{data?.bio}</Text>
+                            <ScrollView className="mx-1 h-44 rounded border-2 border-[#ddd]">
+                                <Text className="p-2 text-base text-[#dadada]">{data.bio}</Text>
+                            </ScrollView>
                             <View className="mt-2">
                                 <Text className="text-xl text-vrcWhite">I speak</Text>
                                 <View className="mt-4 flex-row">

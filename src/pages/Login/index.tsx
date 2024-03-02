@@ -18,7 +18,6 @@ const Index = () => {
     const navigation = useNavigation<any>();
 
     const handleFormChange = (item: any) => {
-        console.warn(item);
         setForm({
             ...form,
             ...item,
@@ -72,7 +71,6 @@ const Index = () => {
             return;
         }
 
-        console.warn(res.data?.bio);
         zustandStorage.setItem("loginInfo", JSON.stringify(form));
         userStore.updateUserInfo(res.data);
     };

@@ -17,7 +17,7 @@ const Index: React.FC<Props> = props => {
     const [data, setData] = useState<groupInfo[]>([]);
     // const { userInfo } = useUserStore();
     const { width } = useWindowDimensions();
-    console.warn(1);
+
     useFocusEffect(
         React.useCallback(() => {
             request.get(`/users/${props.userId}/groups`).then((res: any) => {
