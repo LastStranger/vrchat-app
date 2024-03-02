@@ -16,9 +16,9 @@ const instance = axios.create({
 
 instance.interceptors.response.use(
     response => {
-        if (response.status !== 200) {
-            return Promise.reject(response);
-        }
+        // if (response.status !== 200) {
+        //     return Promise.reject(response);
+        // }
         return Promise.resolve(response);
     },
     error => {

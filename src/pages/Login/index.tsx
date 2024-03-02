@@ -1,41 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, TextInput, TouchableOpacity } from "react-native";
-import { FormType } from "./types";
 import request from "../../utils/request";
 import { Buffer } from "buffer";
 import { StatusBar } from "expo-status-bar";
 import { ParamListBase, useNavigation } from "@react-navigation/native";
 import useUserStore from "../../store/useUserStore";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { Url } from "@/navigation/types";
-import Animated, {
-    FadeIn,
-    FadeInDown,
-    FadeInUp,
-    FadeOut,
-    FadeOutDown,
-    interpolateColor,
-    useAnimatedStyle,
-    useSharedValue,
-    withTiming,
-} from "react-native-reanimated";
-import Toast from "react-native-root-toast";
+import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";
 import { Image } from "expo-image";
 import { zustandStorage } from "@/store/mmkv";
+import { useForm } from "@/pages/Login/hooks";
 
 const AnimatedImage = Animated.createAnimatedComponent(Image);
 const Index = () => {
-    const [form, setForm] = useState<FormType>(null);
+    const [form, setForm] = useForm();
     const [ifNeedCode, setIfNeedCode] = useState<boolean>(false);
     const userStore = useUserStore();
     const navigation = useNavigation<any>();
-
-    useEffect(() => {
-        const loginInfo = zustandStorage.getItem("loginInfo");
-        if (loginInfo) {
-            setForm(JSON.parse(loginInfo as string));
-        }
-    }, []);
 
     const handleFormChange = (item: any) => {
         console.warn(item);
@@ -136,6 +116,7 @@ const Index = () => {
                     className="color-[#6ae3f9] mt-2 rounded border-2 border-[#053c48] bg-[#05191d] px-3 py-3 text-lg/6"
                     placeholder="Password"
                     placeholderTextColor="#757575"
+                    secureTextEntry={true}
                     value={form?.password}
                     onChangeText={val => handleFormChange({ password: val })}
                 />

@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { UserInfo, UserInfoState } from "./types";
 import request from "@/utils/request";
+import axios from "axios";
 
 const useUserStore = create<UserInfoState>(set => ({
     userInfo: null,
@@ -14,9 +15,8 @@ const useUserStore = create<UserInfoState>(set => ({
     },
     getUserInfo: async () => {
         set({ loading: true });
-        // const encodedAuth = "bGFzdF9zdHJhbmdlcjpsekAyMDIzMDMyMA==";
         try {
-            const res = await request.get("/auth/user", {
+            const res = await axios.get("/auth/user", {
                 // headers: { Authorization: `Basic ${encodedAuth}` },
                 // withCredentials: false,
             });
