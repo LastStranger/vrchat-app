@@ -44,7 +44,7 @@ const Index = () => {
                     )}
                 />
             </SafeAreaView>
-            <Text>在线好友数量{friendList.length}</Text>
+            {/*<Text>在线好友数量{friendList.length}</Text>*/}
         </View>
     );
 };
