@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import request from "../../utils/request";
-import { Buffer } from "buffer";
+// import { Buffer } from "buffer";
 import { StatusBar } from "expo-status-bar";
 import { ParamListBase, useNavigation } from "@react-navigation/native";
 import useUserStore from "../../store/useUserStore";

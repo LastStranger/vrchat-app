@@ -16,7 +16,7 @@ const useUserStore = create<UserInfoState>(set => ({
     getUserInfo: async () => {
         set({ loading: true });
         try {
-            const res = await axios.get("/auth/user", {
+            const res = await request.get("/auth/user", {
                 // headers: { Authorization: `Basic ${encodedAuth}` },
                 // withCredentials: false,
             });

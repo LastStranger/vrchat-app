@@ -67,58 +67,62 @@ const Index = () => {
     // console.warn("rendering home1");
 
     return (
-        <SafeAreaView className="flex-1 bg-[#2d363f]">
-            <ScrollView className="mb-4 flex-1">
-                <View className="overflow-hidden rounded-lg bg-[#181b1f]">
-                    <Image
-                        className="aspect-[390/215] w-full"
-                        source={{ uri: userInfo.currentAvatarThumbnailImageUrl }}
-                    />
-                    <View className="px-5 py-3">
-                        <View className="mb-1.5 mt-1 flex-row items-center">
-                            <Text className="text-3xl font-bold text-[#f8f9fa]">{userInfo.displayName}</Text>
-                        </View>
-                        <View className="flex-row items-center justify-between">
-                            <View className="flex-row items-center">
-                                <View className={`mr-2.5 h-4 w-4 rounded-full ${renderStatusColor(userInfo.status)}`} />
-                                <Text className="w-[210] text-xl text-vrcWhite">{userInfo.statusDescription}</Text>
+        <View className="flex-1 bg-[#2d363f]">
+            <SafeAreaView className="flex-1">
+                <ScrollView className="flex-1">
+                    <View className="overflow-hidden rounded-lg bg-[#181b1f]">
+                        <Image
+                            className="aspect-[390/215] w-full"
+                            source={{ uri: userInfo.currentAvatarThumbnailImageUrl }}
+                        />
+                        <View className="px-5 py-3">
+                            <View className="mb-1.5 mt-1 flex-row items-center">
+                                <Text className="text-3xl font-bold text-[#f8f9fa]">{userInfo.displayName}</Text>
                             </View>
-                            <View
-                                style={{
-                                    backgroundColor: getRankColorByRank(currentRank),
-                                    transform: [{ scale: 0.8 }],
-                                }}
-                                className="flex-row items-center justify-center rounded-lg px-2 py-1"
-                            >
-                                <Ionicons name="shield" size={12} color="black" />
-                                <Text className="ml-1">{currentRank}</Text>
+                            <View className="flex-row items-center justify-between">
+                                <View className="flex-row items-center">
+                                    <View
+                                        className={`mr-2.5 h-4 w-4 rounded-full ${renderStatusColor(userInfo.status)}`}
+                                    />
+                                    <Text className="w-[210] text-xl text-vrcWhite">{userInfo.statusDescription}</Text>
+                                </View>
+                                <View
+                                    style={{
+                                        backgroundColor: getRankColorByRank(currentRank),
+                                        transform: [{ scale: 0.8 }],
+                                    }}
+                                    className="flex-row items-center justify-center rounded-lg px-2 py-1"
+                                >
+                                    <Ionicons name="shield" size={12} color="black" />
+                                    <Text className="ml-1">{currentRank}</Text>
+                                </View>
                             </View>
                         </View>
                     </View>
-                </View>
-                <ScrollView className="mx-2 my-9 h-44 min-h-[200] rounded border-2 border-[#ddd]">
-                    <Text className="p-2 text-base text-[#ddd]">{userInfo.bio}</Text>
+                    <ScrollView className="mx-2 my-9 h-44 rounded border-2 border-[#ddd]">
+                        <Text className="p-2 text-base text-[#ddd]">{userInfo.bio}</Text>
+                    </ScrollView>
+                    <View className="mx-2">
+                        <Text className="text-xl text-vrcWhite">I speak</Text>
+                        <View className="mt-4 flex-row">
+                            {languageTags.map(each => (
+                                <View
+                                    key={each}
+                                    // style={{ backgroundColor: "rgba(17,17,17,0.8)" }}
+                                    className="mr-3 rounded-full bg-[#111111] bg-opacity-80 px-3 py-1"
+                                >
+                                    <Text className="text-base font-bold text-vrcWhite">{each}</Text>
+                                </View>
+                            ))}
+                        </View>
+                    </View>
+                    <Groups userId={userInfo?.id} />
+                    <TouchableOpacity className="mx-2 my-2 items-center rounded bg-[#064b5c] p-2" onPress={logOut}>
+                        <Text className="color-[#6ae3f9] text-2xl">退出登录</Text>
+                    </TouchableOpacity>
                 </ScrollView>
-                <View className="mx-2">
-                    <Text className="text-xl text-vrcWhite">I speak</Text>
-                    <View className="mt-4 flex-row">
-                        {languageTags.map(each => (
-                            <View
-                                key={each}
-                                // style={{ backgroundColor: "rgba(17,17,17,0.8)" }}
-                                className="mr-3 rounded-full bg-[#111111] bg-opacity-80 px-3 py-1"
-                            >
-                                <Text className="text-base font-bold text-vrcWhite">{each}</Text>
-                            </View>
-                        ))}
-                    </View>
-                </View>
-                <Groups userId={userInfo?.id} />
-                {/*<Pressable onPress={handleLogOut}>*/}
-                {/*    <Text className="text-2xl">log out</Text>*/}
-                {/*</Pressable>*/}
-            </ScrollView>
-        </SafeAreaView>
+            </SafeAreaView>
+        </View>
     );
 };
 

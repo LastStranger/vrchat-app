@@ -40,7 +40,7 @@ function AppNavigation() {
                     // </>
                     <>
                         <Stack.Screen name="login" component={Login} />
-                        <Stack.Screen name="test" component={TestPage} />
+                        {/*<Stack.Screen name="test" component={TestPage} />*/}
                     </>
                 )}
             </Stack.Navigator>
