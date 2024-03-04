@@ -67,13 +67,17 @@ export function getRankNameByTags(tags: string[]) {
 export function getLanguage(prefixLanguage: string) {
     switch (prefixLanguage) {
         case "language_eng":
-            return "English";
+            return "英语";
         case "language_zho":
             return "中文";
         case "language_jpn":
             return "日本語";
         case "language_por":
             return "葡萄牙语";
+        case "language_tha":
+            return "泰语";
+        case "language_pol":
+            return "波兰语";
         default:
             return "未知";
     }

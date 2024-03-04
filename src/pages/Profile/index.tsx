@@ -61,19 +61,21 @@ const Index = ({ route, navigation }) => {
                             <ScrollView className="mx-1 h-44 rounded border-2 border-[#ddd]">
                                 <Text className="p-2 text-base text-[#dadada]">{data.bio}</Text>
                             </ScrollView>
-                            <View className="mt-2">
-                                <Text className="text-xl text-vrcWhite">I speak</Text>
-                                <View className="mt-4 flex-row">
-                                    {data?.languages?.map(each => (
-                                        <View
-                                            // style={{ backgroundColor: "rgba(17,17,17,0.8)" }}
-                                            className="mr-3 rounded-full bg-[#111111] bg-opacity-80 px-3 py-1"
-                                        >
-                                            <Text className="text-base font-bold text-vrcWhite">{each}</Text>
-                                        </View>
-                                    ))}
+                            {data?.languages?.length > 0 && (
+                                <View className="mt-2">
+                                    <Text className="text-xl text-vrcWhite">I speak</Text>
+                                    <View className="mt-4 flex-row">
+                                        {data?.languages?.map(each => (
+                                            <View
+                                                key={each}
+                                                className="mr-3 rounded-full bg-[#111111] bg-opacity-80 px-3 py-1"
+                                            >
+                                                <Text className="text-base font-bold text-vrcWhite">{each}</Text>
+                                            </View>
+                                        ))}
+                                    </View>
                                 </View>
-                            </View>
+                            )}
                         </View>
                     </View>
                     {data?.id && <Groups userId={data?.id} displayName={data?.displayName} />}

@@ -27,11 +27,9 @@ const Index: React.FC<Props> = props => {
             <View className="h-[242px] w-[320px] overflow-hidden rounded-[8px] bg-[#181b1f]">
                 <View className="h-[150] bg-[#252a30]">
                     <ImageBackground className="aspect-[3/1] w-full" source={{ uri: item.bannerUrl }}>
-                        <Image
-                            // style={{ borderWidth: 3 }}
-                            className="absolute bottom-[-32] left-[13] h-[75] w-[75] rounded-full border-[3px] border-[#181b1f]"
-                            source={{ uri: item.iconUrl }}
-                        />
+                        <View className="absolute bottom-[-32] left-[13] rounded-full border-[3px] border-[#181b1f]">
+                            <Image className=" h-[75] w-[75] rounded-full" source={{ uri: item.iconUrl }} />
+                        </View>
                     </ImageBackground>
                     <Text className="ml-[100] mr-[10] mt-[4] text-xl font-bold text-white" numberOfLines={1}>
                         {item.name}
