@@ -12,5 +12,5 @@ export const useForm = () => {
         }
     }, []);
 
-    return [form, setForm];
+    return [form, setForm] as const;
 };

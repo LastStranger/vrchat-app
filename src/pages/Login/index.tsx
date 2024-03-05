@@ -5,7 +5,15 @@ import request from "../../utils/request";
 import { StatusBar } from "expo-status-bar";
 import { ParamListBase, useNavigation } from "@react-navigation/native";
 import useUserStore from "../../store/useUserStore";
-import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";
+import Animated, {
+    FadeInDown,
+    FadeInUp,
+    useAnimatedStyle,
+    useSharedValue,
+    withRepeat,
+    withSequence,
+    withTiming,
+} from "react-native-reanimated";
 import { Image } from "expo-image";
 import { zustandStorage } from "@/store/mmkv";
 import { useForm } from "@/pages/Login/hooks";
@@ -16,6 +24,18 @@ const Index = () => {
     const [ifNeedCode, setIfNeedCode] = useState<boolean>(false);
     const userStore = useUserStore();
     const navigation = useNavigation<any>();
+    const degree = useSharedValue(0);
+
+    useEffect(() => {
+        degree.value = withRepeat(
+            withSequence(withTiming(180, { duration: 2000 }), withTiming(360, { duration: 2000 })),
+            -1,
+        );
+    }, []);
+
+    const animatedStyle = useAnimatedStyle(() => ({
+        transform: [{ rotateY: `${degree.value}deg` }],
+    }));
 
     const handleFormChange = (item: any) => {
         setForm({
@@ -95,6 +115,7 @@ const Index = () => {
         <View className="flex-1 items-center justify-center bg-[#2d363f] px-4">
             <StatusBar style="light" />
             <AnimatedImage
+                style={animatedStyle}
                 className="aspect-[118/50] w-32"
                 source={{
                     uri: "https://assets.vrchat.com/www/brand/vrchat-logo-white-transparent-crop-background.png",
@@ -136,7 +157,7 @@ const Index = () => {
                     className="full mt-2 items-center rounded bg-[#064b5c] p-2"
                     onPress={() => handleLogin()}
                 >
-                    <Text className="color-[#6ae3f9] text-2xl">Login</Text>
+                    <Text className="color-[#6ae3f9] text-2xl">登录</Text>
                 </TouchableOpacity>
             </Animated.View>
         </View>
