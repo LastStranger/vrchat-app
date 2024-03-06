@@ -1,22 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TextInput, TouchableOpacity } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, ActivityIndicator } from "react-native";
 import request from "../../utils/request";
-// import { Buffer } from "buffer";
 import { StatusBar } from "expo-status-bar";
 import { ParamListBase, useNavigation } from "@react-navigation/native";
 import useUserStore from "../../store/useUserStore";
-import Animated, {
-    FadeInDown,
-    FadeInUp,
-    useAnimatedStyle,
-    useSharedValue,
-    withRepeat,
-    withSequence,
-    withTiming,
-} from "react-native-reanimated";
+import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";
 import { Image } from "expo-image";
 import { zustandStorage } from "@/store/mmkv";
-import { useForm } from "@/pages/Login/hooks";
+import { useFlipAnimate, useForm } from "@/pages/Login/hooks";
+import { Buffer } from "buffer";
 
 const AnimatedImage = Animated.createAnimatedComponent(Image);
 const Index = () => {
@@ -24,18 +16,8 @@ const Index = () => {
     const [ifNeedCode, setIfNeedCode] = useState<boolean>(false);
     const userStore = useUserStore();
     const navigation = useNavigation<any>();
-    const degree = useSharedValue(0);
-
-    useEffect(() => {
-        degree.value = withRepeat(
-            withSequence(withTiming(180, { duration: 2000 }), withTiming(360, { duration: 2000 })),
-            -1,
-        );
-    }, []);
-
-    const animatedStyle = useAnimatedStyle(() => ({
-        transform: [{ rotateY: `${degree.value}deg` }],
-    }));
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const animatedStyle = useFlipAnimate(isSubmitting);
 
     const handleFormChange = (item: any) => {
         setForm({
@@ -68,6 +50,11 @@ const Index = () => {
     };
 
     const handleLogin = async (ifNeedCookie: boolean = true) => {
+        setIsSubmitting(true);
+        // setTimeout(() => {
+        //     setIsSubmitting(false);
+        // }, 3000);
+        // return;
         // if (!ifNeedCookie) {
         //     // const RCTNetworking = require("react-native/Libraries/Network/RCTNetworking");
         //     // RCTNetworking.clearCookies(() => {});
@@ -98,8 +85,6 @@ const Index = () => {
     const handleGoToHome = () => {
         navigation.navigate("home");
     };
-
-    // 登录loading 链接"https://assets.vrchat.com/www/images/loading.gif"
 
     if (userStore.loading) {
         return (
@@ -154,10 +139,12 @@ const Index = () => {
                     </View>
                 )}
                 <TouchableOpacity
-                    className="full mt-2 items-center rounded bg-[#064b5c] p-2"
+                    className="full mt-2 flex-row items-center justify-center rounded bg-[#064b5c] p-2"
                     onPress={() => handleLogin()}
+                    disabled={isSubmitting}
                 >
                     <Text className="color-[#6ae3f9] text-2xl">登录</Text>
+                    {isSubmitting && <ActivityIndicator />}
                 </TouchableOpacity>
             </Animated.View>
         </View>

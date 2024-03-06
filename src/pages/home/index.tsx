@@ -22,7 +22,8 @@ const Index = () => {
 
     useFocusEffect(
         React.useCallback(() => {
-            getUserInfo();
+            // todo 是否有更好的方式
+            // getUserInfo();
             // const unsubscribe = API.subscribe(userId, user => setUser(user));
             // return () => unsubscribe();
         }, []),
