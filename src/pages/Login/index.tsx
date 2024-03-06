@@ -27,26 +27,33 @@ const Index = () => {
     };
 
     const handleEmailVerify = async (ifNeedCookie: boolean = true) => {
-        const res = await request.post(
-            "/auth/twofactorauth/emailotp/verify",
-            {
-                code: form?.authCode,
-            },
-            {
-                headers: { "Content-Type": "application/json" },
-                withCredentials: true,
-            },
-        );
-        if (!res.data?.verified) {
-            return;
+        try {
+            const res = await request.post(
+                "/auth/twofactorauth/emailotp/verify",
+                {
+                    code: form?.authCode,
+                },
+                {
+                    headers: { "Content-Type": "application/json" },
+                    withCredentials: true,
+                },
+            );
+            if (!res.data?.verified) {
+                return;
+            }
+            // return;
+            const Buffer = require("buffer").Buffer;
+            let encodedAuth = new Buffer(`${encodeURI(form?.username)}:${encodeURI(form?.password)}`).toString(
+                "base64",
+            );
+
+            const result = await request.get("/auth/user", {
+                headers: { Authorization: `Basic ${encodedAuth}` },
+            });
+            userStore.updateUserInfo(result.data);
+        } catch (err) {
+            setIsSubmitting(false);
         }
-        // return;
-        const Buffer = require("buffer").Buffer;
-        let encodedAuth = new Buffer(`${encodeURI(form?.username)}:${encodeURI(form?.password)}`).toString("base64");
-        const result = await request.get("/auth/user", {
-            headers: { Authorization: `Basic ${encodedAuth}` },
-        });
-        userStore.updateUserInfo(result.data);
     };
 
     const handleLogin = async (ifNeedCookie: boolean = true) => {
@@ -68,18 +75,22 @@ const Index = () => {
         // return;
         const Buffer = require("buffer").Buffer;
         let encodedAuth = new Buffer(`${encodeURI(form?.username)}:${encodeURI(form?.password)}`).toString("base64");
-        const res = await request.get("/auth/user", {
-            headers: { Authorization: `Basic ${encodedAuth}` },
-            withCredentials: true,
-        });
-        // console.log(res);
-        if (res.data.requiresTwoFactorAuth) {
-            setIfNeedCode(true);
-            return;
-        }
+        try {
+            const res = await request.get("/auth/user", {
+                headers: { Authorization: `Basic ${encodedAuth}` },
+                withCredentials: true,
+            });
+            // console.log(res);
+            if (res.data.requiresTwoFactorAuth) {
+                setIfNeedCode(true);
+                return;
+            }
 
-        zustandStorage.setItem("loginInfo", JSON.stringify(form));
-        userStore.updateUserInfo(res.data);
+            zustandStorage.setItem("loginInfo", JSON.stringify(form));
+            userStore.updateUserInfo(res.data);
+        } catch (e) {
+            setIsSubmitting(false);
+        }
     };
 
     const handleGoToHome = () => {
