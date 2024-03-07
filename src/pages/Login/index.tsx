@@ -78,11 +78,12 @@ const Index = () => {
         try {
             const res = await request.get("/auth/user", {
                 headers: { Authorization: `Basic ${encodedAuth}` },
-                withCredentials: true,
+                withCredentials: ifNeedCookie,
             });
             // console.log(res);
             if (res.data.requiresTwoFactorAuth) {
                 setIfNeedCode(true);
+                setIsSubmitting(false);
                 return;
             }
 
@@ -138,15 +139,15 @@ const Index = () => {
                 {ifNeedCode && (
                     <View>
                         <View className="mt-2 flex-row items-center">
-                            <Text className="color color-[#6ae3f9] text-base">验证码:</Text>
+                            <Text className="color color-[#6ae3f9] text-base">邮箱验证码:</Text>
                             <TextInput
                                 className="color-[#6ae3f9] ml-2 flex-1 rounded border-2 border-[#053c48] bg-[#05191d] px-3 py-3 text-lg/6"
-                                placeholder="请输入验证码"
+                                placeholder="请输入邮箱验证码"
                                 placeholderTextColor="#757575"
                                 onChangeText={val => handleFormChange({ authCode: val })}
                             />
                         </View>
-                        <Text onPress={() => handleLogin(false)}>没收到?尝试清除cookie再试一次</Text>
+                        <Text onPress={() => handleLogin(false)}>没收到验证码?点击此处重发验证码</Text>
                     </View>
                 )}
                 <TouchableOpacity

@@ -20,6 +20,10 @@ const useUserStore = create<UserInfoState>(set => ({
                 // headers: { Authorization: `Basic ${encodedAuth}` },
                 // withCredentials: false,
             });
+            if (!res.data?.id) {
+                set({ loading: false });
+                return;
+            }
             set({ userInfo: res.data, loading: false });
         } catch (e) {
             set({ loading: false });
