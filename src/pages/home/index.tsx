@@ -8,6 +8,7 @@ import { getLanguage, getRank, getRankColor, getRankColorByRank } from "@/utils"
 import { Ionicons } from "@expo/vector-icons";
 import Groups from "@/pages/home/components/Groups";
 import { Image } from "expo-image";
+import Name from "@/pages/home/components/Name";
 // import {Ionicons} from "@expo/vector-icons";
 
 const Index = () => {
@@ -77,9 +78,7 @@ const Index = () => {
                             source={{ uri: userInfo.currentAvatarThumbnailImageUrl }}
                         />
                         <View className="px-5 py-3">
-                            <View className="mb-1.5 mt-1 flex-row items-center">
-                                <Text className="text-3xl font-bold text-[#f8f9fa]">{userInfo.displayName}</Text>
-                            </View>
+                            <Name displayName={userInfo.displayName} />
                             <View className="flex-row items-center justify-between">
                                 <View className="flex-row items-center">
                                     <View
