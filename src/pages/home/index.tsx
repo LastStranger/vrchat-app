@@ -9,7 +9,6 @@ import { Ionicons } from "@expo/vector-icons";
 import Groups from "@/pages/home/components/Groups";
 import { Image } from "expo-image";
 import Name from "@/pages/home/components/Name";
-// import {Ionicons} from "@expo/vector-icons";
 
 const Index = () => {
     // const { userInfo, pressTest, clearUserInfo, logOut, getUserInfo } = useUserStore();
@@ -65,8 +64,6 @@ const Index = () => {
     const handleLogOut = () => {
         logOut();
     };
-
-    // console.warn("rendering home1");
 
     return (
         <View className="flex-1 bg-[#2d363f]">
