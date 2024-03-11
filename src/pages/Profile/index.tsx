@@ -34,8 +34,8 @@ const Index = ({ route, navigation }) => {
             {/*/>*/}
             <SafeAreaView className="flex-1">
                 <ScrollView className="flex-1">
-                    <Text className="ml-1.5 text-4xl font-bold text-white">{data?.displayName}'s Profile</Text>
-                    <View className="mt-9 min-h-[325] w-full bg-black">
+                    {/*<Text className="ml-1.5 text-4xl font-bold text-white">{data?.displayName}'s Profile</Text>*/}
+                    <View className="mt-1 min-h-[325] w-full bg-black">
                         <Image
                             className="h-[215] w-full"
                             resizeMode="cover"
@@ -43,6 +43,7 @@ const Index = ({ route, navigation }) => {
                         />
                         <View className="px-5 py-3">
                             <Text className="text-4xl font-bold text-white">{data?.displayName}</Text>
+                            <Text className="text-white">{data?.note}</Text>
                             <View className="mt-1 flex-row items-center justify-between">
                                 <View className="flex-row items-center">
                                     <View className={`h-4 w-4 rounded-full ${statusColor(data?.status)}`} />

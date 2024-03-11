@@ -18,7 +18,7 @@ const useUserStore = create<UserInfoState>(set => ({
         try {
             const res = await request.get("/auth/user", {
                 // headers: { Authorization: `Basic ${encodedAuth}` },
-                // withCredentials: false,
+                withCredentials: true,
             });
             if (!res.data?.id) {
                 set({ loading: false });

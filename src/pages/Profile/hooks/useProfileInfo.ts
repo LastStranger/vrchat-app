@@ -11,6 +11,7 @@ type ProfileData = {
 
     currentAvatarImageUrl: string;
     displayName: string;
+    note?: string;
     status: string;
     statusDescription: string;
     tags: string[];
