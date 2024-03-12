@@ -8,12 +8,11 @@ this is an APP to help VRChat players change status、bio and check friends stat
 
 ## Features
 
-List the main features of the project.
-
 - login
 - basic info
 - online friendList
 - friend status(name, bio, groups,etc)
+- more features coming on the road
 
 ## Installation
 
