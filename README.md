@@ -23,4 +23,4 @@ go to the release section to download the latest apk files,(current only availab
 
 ## License
 
-React Native Magic Modal is licensed under the MIT License.
+vrchat-app is licensed under the MIT License.
