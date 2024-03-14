@@ -97,7 +97,7 @@ const Index = () => {
                         </View>
                     </View>
                     <ScrollView className="mx-2 my-9 h-44 rounded border-2 border-[#ddd]">
-                        <Text className="p-2 text-base text-[#ddd]">{userInfo.bio}</Text>
+                        <Text className="p-2 text-base text-[#ddd]">{userInfo?.bio}</Text>
                     </ScrollView>
                     <View className="mx-2">
                         <Text className="text-xl text-vrcWhite">I speak</Text>

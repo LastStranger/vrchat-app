@@ -36,7 +36,7 @@ export function getRankColorByTags(tags: string[] = []) {
         case "system_trust_trusted":
             return "#ff7b42";
         case "system_trust_known":
-            return "User";
+            return "#51e57e";
         case "system_trust_basic":
             return "New";
         default:
