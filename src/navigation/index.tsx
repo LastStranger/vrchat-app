@@ -10,6 +10,7 @@ import FriendList from "../pages/friendList";
 import TestPage from "../pages/testPage";
 import Main from "@/pages/main";
 import Profile from "@/pages/Profile";
+import EditInfo from "@/pages/editInfo";
 
 const Stack = createNativeStackNavigator();
 
@@ -32,6 +33,7 @@ function AppNavigation() {
                     <>
                         <Stack.Screen name="main" component={Main} />
                         <Stack.Screen name="profile" component={Profile} />
+                        <Stack.Screen name="editInfo" component={EditInfo} />
                     </>
                 ) : (
                     // <>
