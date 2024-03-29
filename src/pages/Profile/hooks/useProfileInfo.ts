@@ -10,6 +10,7 @@ type ProfileData = {
     id: string;
 
     currentAvatarImageUrl: string;
+    profilePicOverride: string;
     displayName: string;
     note?: string;
     status: string;
@@ -30,7 +31,11 @@ const useProfileInfo = (id: string): [ProfileData, boolean] => {
                 const languages = res.data?.tags
                     ?.filter(each => each.startsWith("language_"))
                     .reduce((acc, tag) => [...acc, getLanguage(tag)], []);
-                setData({ ...res.data, languages });
+                setData({
+                    ...res.data,
+                    languages,
+                    currentAvatarImageUrl: res.data?.profilePicOverride ?? res.data?.currentAvatarImageUrl,
+                });
             })
             .finally(() => {
                 setLoading(false);
