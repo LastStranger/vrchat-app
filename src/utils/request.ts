@@ -1,6 +1,7 @@
 import axios from "axios";
 import Toast from "react-native-root-toast";
 import UserAgent from "react-native-user-agent";
+import { useNavigation } from "@react-navigation/native";
 
 // const ua = UserAgent?.applicationName + "dddddd";
 const ua = UserAgent?.getUserAgent();
@@ -28,6 +29,8 @@ instance.interceptors.response.use(
                     Toast.show(error.response?.data?.error?.message ?? "身份验证过期", {
                         position: Toast.positions.CENTER,
                     });
+                    const navigation = useNavigation<any>();
+                    navigation.navigate("login");
                     break;
                 case 400:
                     Toast.show(error.response?.data?.error?.message ?? "身份验证失败", {
