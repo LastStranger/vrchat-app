@@ -102,6 +102,8 @@ export const statusColor = (status: string) => {
             return "bg-online";
         case "join me":
             return "bg-joinMe";
+        case "busy":
+            return "bg-busy";
         default:
             return "";
     }

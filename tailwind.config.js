@@ -13,6 +13,7 @@ module.exports = {
                 trusted: "#8143e6",
                 visitor: "#cccccc",
                 known: "#ff7b42",
+                white: "#dddddd",
             },
         },
     },
