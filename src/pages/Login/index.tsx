@@ -117,7 +117,7 @@ const Index = () => {
                 source={{
                     uri: "https://assets.vrchat.com/www/brand/vrchat-logo-white-transparent-crop-background.png",
                 }}
-                entering={FadeInUp.delay(150)}
+                // entering={FadeInUp.delay(150)} //todo 和layout动画有冲突
             />
             <Animated.View className="mt-3 w-full" entering={FadeInDown.delay(150)}>
                 <TextInput
