@@ -3,6 +3,7 @@ import { FormType } from "./types";
 import { zustandStorage } from "@/store/mmkv";
 import {
     Easing,
+    runOnJS,
     useAnimatedStyle,
     useSharedValue,
     withRepeat,
@@ -27,23 +28,42 @@ export const useFlipAnimate = (loading: boolean) => {
     const degree = useSharedValue(0);
 
     useEffect(() => {
-        if (loading) {
-            degree.value = withRepeat(
-                withSequence(
-                    withTiming(90, { duration: 800, easing: Easing.linear }),
-                    withTiming(0, {
-                        duration: 800,
-                        easing: Easing.linear,
-                    }),
-                ),
-                -1,
-            );
-        } else {
-            degree.value = 0;
-        }
+        runOnJS(() => {
+            if (loading) {
+                degree.value = withRepeat(
+                    withSequence(
+                        withTiming(90, { duration: 800, easing: Easing.linear }),
+                        withTiming(0, {
+                            duration: 800,
+                            easing: Easing.linear,
+                        }),
+                    ),
+                    -1,
+                );
+            } else {
+                degree.value = 0;
+            }
+        })();
     }, [loading]);
-
-    return useAnimatedStyle(() => ({
-        transform: [{ rotateY: `${degree.value}deg` }],
-    }));
+    return useAnimatedStyle(() => {
+        // console.warn(degree.value);
+        // if (loading) {
+        //     degree.value = withRepeat(
+        //         withSequence(
+        //             withTiming(90, { duration: 800, easing: Easing.linear }),
+        //             withTiming(0, {
+        //                 duration: 800,
+        //                 easing: Easing.linear,
+        //             }),
+        //         ),
+        //         -1,
+        //     );
+        // } else {
+        //     degree.value = 0;
+        // }
+        // console.warn(degree.value);
+        return {
+            transform: [{ rotateY: `${degree.value}deg` }],
+        };
+    }, [loading]);
 };

@@ -58,6 +58,11 @@ const Index = () => {
 
     const handleLogin = async (ifNeedCookie: boolean = true) => {
         setIsSubmitting(true);
+        //test code
+        // setTimeout(() => {
+        //     setIsSubmitting(false);
+        // }, 900);
+        // return;
         // setTimeout(() => {
         //     setIsSubmitting(false);
         // }, 3000);
@@ -103,7 +108,7 @@ const Index = () => {
             <Image
                 className="h-full w-full bg-[#2d363f]"
                 contentFit="contain"
-                source="https://assets.vrchat.com/www/images/loading.gif"
+                source={require("@/assets/images/loading.gif")}
             />
         );
     }
@@ -111,14 +116,13 @@ const Index = () => {
     return (
         <View className="flex-1 items-center justify-center bg-[#2d363f] px-4">
             <StatusBar style="light" />
-            <AnimatedImage
-                style={animatedStyle}
-                className="aspect-[118/50] w-32"
-                source={{
-                    uri: "https://assets.vrchat.com/www/brand/vrchat-logo-white-transparent-crop-background.png",
-                }}
-                // entering={FadeInUp.delay(150)} //todo 和layout动画有冲突
-            />
+            <Animated.View style={animatedStyle}>
+                <AnimatedImage
+                    className="aspect-[118/50] w-32"
+                    source={require("@/assets/images/vrchat_icon.png")}
+                    entering={FadeInUp.delay(150)}
+                />
+            </Animated.View>
             <Animated.View className="mt-3 w-full" entering={FadeInDown.delay(150)}>
                 <TextInput
                     className="color-[#6ae3f9] rounded border-2 border-[#053c48] bg-[#05191d] px-3 py-3 text-lg/6"
